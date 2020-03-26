@@ -1,6 +1,6 @@
 class ExampleVoronoi{
   int numVertices = 100;
-  float size = 800;
+  float size = 200;
   Voronoi voronoi;
   ArrayList<Vertex> vertices = new ArrayList<Vertex>();
   int seed = 0;

@@ -18,7 +18,7 @@ void line(float[] a, float[] b){
 }
 
 void point(float[] p){
-  strokeWeight(50);
+  strokeWeight(10);
   switch(p.length){
     case 2:
       point(p[0], p[1], 0);
@@ -27,7 +27,7 @@ void point(float[] p){
       point(p[0], p[1], p[2]);
       break;
   }
-  strokeWeight(20);
+  strokeWeight(5);
 }
 
 void vertex(float[] p){

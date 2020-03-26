@@ -6,8 +6,8 @@ ExampleVoronoi voronoi2D = new ExampleVoronoi(2);
 ExampleVoronoi voronoi3D = new ExampleVoronoi(3);
 
 void setup(){
-  fullScreen(P3D);
-  //size(500, 500, P3D);
+  //fullScreen(P3D);
+  size(500, 500, P3D);
   ortho();
 }
 
