@@ -12,7 +12,7 @@ class Voronoi{
     delaunay.Generate(input);
     ArrayList<Simplex> around = new ArrayList<Simplex>();//simplex around vertices
     for(int i = 0; i < delaunay.vertices.size(); i++){
-      Region region = new Region();
+      Region region = new Region(dim);
       around.clear();
       Vertex vertex = delaunay.vertices.get(i);
       for(int j = 0; j < delaunay.simplexes.size(); j++){

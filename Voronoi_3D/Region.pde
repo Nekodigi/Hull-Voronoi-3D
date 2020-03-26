@@ -9,9 +9,9 @@ class Region{
     hull = new ConvexHull(dim);
   }
   
-  void calc(){
-    hull.Generate()
-  }
+  //void calc(){
+    //hull.Generate();
+  //}
   
   void show(){
     for(Simplex edge : edges){

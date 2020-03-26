@@ -13,7 +13,7 @@ class Simplex{
   float maxDist;
   // The simplexs normal.
   float[] normal;
-  float[] circumC;//circumCenter
+  Vertex circumC;//circumCenter
   float circumR;//circumRadius
   boolean isNormalFlipped;
   // The simplexs centroid.
@@ -47,24 +47,16 @@ class Simplex{
     furthestVertex = null;
   }
   
-  void Itriangle(int a, int b, int c){
-    triangle(vertices[a].pos, vertices[b].pos, vertices[c].pos);
-  }
-  
   void show(){
     switch(vertices.length){
       case 2:
         line(vertices[0].pos, vertices[1].pos);
-        break;
       case 3:
-        Itriangle(0, 1, 2);
-        break;
-      case 4:
-        Itriangle(0, 1, 2);
-        Itriangle(1, 2, 3);
-        Itriangle(2, 3, 0);
-        Itriangle(3, 0, 1);
-        break;
+        beginShape();
+        for(Vertex vertex : vertices){
+          vertex(vertex.pos);
+        }
+        endShape(CLOSE);
     }
   }
   
@@ -89,8 +81,9 @@ class Simplex{
     float t1 = a*a*(b*b + c*c - a*a);
     float t2 = b*b*(c*c + a*a - b*b);
     float t3 = c*c*(a*a + b*b - c*c);
-    circumC = div(add(add(mult(A, t1), mult(B, t2)), mult(C, t3)), t1 + t2 + t3);
-    circumR = dist(circumC, A);
+    float[] circumC_ = div(add(add(mult(A, t1), mult(B, t2)), mult(C, t3)), t1 + t2 + t3);
+    circumC = new Vertex(0, circumC_);
+    circumR = dist(circumC_, A);
   }
   
   void calcCircumTetra(){//https://math.stackexchange.com/questions/2414640/circumsphere-of-a-tetrahedron
@@ -109,7 +102,8 @@ class Simplex{
     float[] u12c = cross(u1, u2);
     float[] t1 = add(add(mult(u23c, sqrl01), mult(u31c, sqrl02)), mult(u12c, sqrl03));
     float t2 = dot(mult(u1, 2), u23c);
-    circumC = add(v0, div(t1, t2));
-    circumR = dist(circumC, v0);
+    float[] circumC_ = add(v0, div(t1, t2));
+    circumC = new Vertex(0, circumC_);
+    circumR = dist(circumC_, v0);
   }
 }
