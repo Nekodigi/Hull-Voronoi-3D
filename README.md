@@ -2,7 +2,7 @@
 Voronoi3D,Spherical Voronoi and other<br>
 Spherical Voronoi<br>
 [![](http://img.youtube.com/vi/rqN5j3UuIHo/0.jpg)](http://www.youtube.com/watch?v=rqN5j3UuIHo "")<br>
-<img width="1920" alt="Spherical Voronoi" src="https://user-images.githubusercontent.com/38092328/77707633-122a4c80-7009-11ea-90db-338c928fa6c5.png">
+<img width="500" alt="Spherical Voronoi" src="https://user-images.githubusercontent.com/38092328/77707633-122a4c80-7009-11ea-90db-338c928fa6c5.png"><br>
 Voronoi3D<br>
 [![](http://img.youtube.com/vi/ZDhQI7gVvS8/0.jpg)](http://www.youtube.com/watch?v=ZDhQI7gVvS8 "")<br>
 ### Click here for details
