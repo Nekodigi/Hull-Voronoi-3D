@@ -1,6 +1,6 @@
 //based on this code https://github.com/Scrawk/Hull-Delaunay-Voronoi
 float basehue = 0;
-boolean modeDelaunay = true;
+boolean modeDelaunay = false;
 float rescale4CSV;
 
 ExampleVoronoi ev2;
@@ -27,6 +27,10 @@ void keyPressed(){
     basehue = random(360);
     ev2 = new ExampleVoronoi();
     ed2 = new ExampleDelaunay();
+    ev2.offset(0.003);
+    ed2.offset(0.003);
+    println(ev2.toCSV("voronoi.txt"));
+    println(ed2.toCSV("delaunay.txt"));
   }
   if(key == 'm'){
     modeDelaunay = !modeDelaunay;

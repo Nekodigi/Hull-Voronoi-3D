@@ -49,6 +49,29 @@ class Polygon{
     return true;
   }
   
+  void solveSelfIntersect(){
+    n = vertices.size();
+    if(n > 3){
+      for(int i = 0; i < n; i++){
+        int i2 = (i+1)%n;
+        int i3 = (i+2)%n;
+        int i4 = (i+3)%n;
+        Vertex ve3 = vertices.get(i3);
+        PVector v1 = toPVec(vertices.get(i).pos);
+        PVector v2 = toPVec(vertices.get(i2).pos);
+        PVector v3 = toPVec(ve3.pos);
+        PVector v4 = toPVec(vertices.get(i4).pos);
+        if(_Intersections.LineLine(v1, v2, v3, v4, true)){
+          PVector interVec = _Intersections.GetLineLineIntersectionPoint(v1, v2, v3, v4);
+          vertices.remove(i2);
+          n = vertices.size();
+          float[] t = {interVec.x, interVec.y};
+          ve3.pos = t;
+        }
+      }
+    }
+  }
+  
   void offset(float thickness){
     if(isClockwise()){
       Collections.reverse(vertices);
@@ -65,6 +88,7 @@ class Polygon{
       vertices.set(u, new Vertex(0, add(vertices.get(u).pos, t)));
       u = i;
     }
+    solveSelfIntersect();
   }
   
   void calcNormal(){
