@@ -13,7 +13,7 @@ class Polygon{
   void show(){
     Vertex[] vs = vertices.toArray(new Vertex[vertices.size()]);
     float[] centor = avg(extractPos(vs));
-    float[] base = {0, 0};                            //50                    500
+    float[] base = {0, 0};                            //                      500
     float theta = constrain(HALF_PI*3-float(frameCount)/50+dist(centor, base)/50, 0, TWO_PI);
     float fac = constrain(sin(theta), 0, 1);
     if(theta < HALF_PI){

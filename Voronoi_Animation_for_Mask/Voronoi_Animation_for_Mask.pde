@@ -1,6 +1,6 @@
 //based on this code https://github.com/Scrawk/Hull-Delaunay-Voronoi
 float basehue = 0;
-boolean modeDelaunay = true;
+boolean modeDelaunay = false;
 
 ExampleSphericalVoronoi esv;
 ExampleVoronoi ev2;

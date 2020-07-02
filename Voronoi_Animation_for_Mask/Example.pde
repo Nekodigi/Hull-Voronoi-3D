@@ -29,8 +29,8 @@ class ExampleSphericalVoronoi{
 }
 
 class ExampleVoronoi{
-  int numVertices = 100;
-  float size = 200;
+  int numVertices = 200;//500
+  float size = 500;//2500
   Voronoi voronoi;
   ArrayList<Vertex> vertices = new ArrayList<Vertex>();
   int seed = 0;
