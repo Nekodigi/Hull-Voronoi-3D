@@ -7,6 +7,14 @@ PVector toPVec(float[] p){
   throw new IllegalArgumentException("vertex cound error");
 }
 
+ArrayList<PVector> toPVec(ArrayList<Vertex> vertices){
+  ArrayList<PVector> result = new ArrayList<PVector>();
+  for(Vertex v : vertices){
+    result.add(toPVec(v.pos));
+  }
+  return result;
+}
+
 float dot(float[] a, float[] b){
   float sum = 0;
   for(int i = 0; i < a.length; i++){

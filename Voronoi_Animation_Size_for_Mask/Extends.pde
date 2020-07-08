@@ -32,3 +32,7 @@ void vertex(float[] p){
       break;
   }
 }
+
+void vertex(PVector p){
+  vertex(p.x, p.y, p.z);
+}
