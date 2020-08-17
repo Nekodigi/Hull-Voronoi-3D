@@ -55,10 +55,3 @@ ArrayList<Polygon> simplex2Poly(ArrayList<Simplex> simplexes){
   }
   return result;
 }
-
-boolean contains(ArrayList<Integer> ids, int id){
-  for(int i : ids){
-    if(id == i)return true;
-  }
-  return false;
-}

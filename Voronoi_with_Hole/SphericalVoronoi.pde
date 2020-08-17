@@ -1,24 +1,20 @@
-class Voronoi{
-  int dim;
+class SphericalVoronoi{
   ArrayList<Vertex> vertices;
   ArrayList<Polygon> polygons = new ArrayList<Polygon>();
-  Delaunay delaunay;
+  ConvexHull hull = new ConvexHull(3);
   
-  Voronoi(int dim){
-    this.dim = dim;
-    delaunay = new Delaunay(dim);
-  }
-  
+  SphericalVoronoi(){}
+
   void Generate(ArrayList<Vertex> input){
-    delaunay.Generate(input);
-    for(Simplex simplex : delaunay.simplexes){//calculation all circumCenter
+    hull.Generate(input);
+    for(Simplex simplex : hull.simplexes){//calculation all circumCenter
       simplex.calcCircumCenter();
     }
-    vertices = delaunay.vertices;//we use this when 2d
+    vertices = hull.vertices;
     for(Vertex v : vertices){//calculate all polygon
-      Polygon polygon = new Polygon();
+      Polygon polygon = new Polygon(v.col);
       Simplex current = null; 
-      for(Simplex simplex : delaunay.simplexes){//pick up one of simplex which contain v
+      for(Simplex simplex : hull.simplexes){//pick up one of simplex which contain v
         if(hasItem(v, simplex.vertices)){
           current = simplex;
           break;
@@ -27,24 +23,21 @@ class Voronoi{
       Simplex[] adjHasV = getAdjHasVertex(current, v);//get adjacent around v
       Simplex end = adjHasV[0];
       Simplex prev = current;
-      current = adjHasV[1];if(end.circumC == null)continue;if(prev.circumC == null)continue;
+      current = adjHasV[1];
       polygon.vertices.add(end.circumC);
       polygon.vertices.add(prev.circumC);
-      boolean breakTag = false;
       while(current != end){//add vertex while going around v
-      if(current == null)break;
         adjHasV = getAdjHasVertex(current, v);
         if(adjHasV[0] != prev){//to avoid backing
-          prev = current;if(prev.circumC == null){breakTag = true; break;};
+          prev = current;
           polygon.vertices.add(prev.circumC);
           current = adjHasV[0];
         }else{
-          prev = current;if(prev.circumC == null){breakTag = true; break;};
+          prev = current;
           polygon.vertices.add(prev.circumC);
           current = adjHasV[1];
         }
       }
-      if(breakTag == true) continue;
       polygons.add(polygon);
     }
   }

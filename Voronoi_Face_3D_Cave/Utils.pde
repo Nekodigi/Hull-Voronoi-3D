@@ -41,24 +41,28 @@ boolean hasItem(Vertex v, Vertex[] vertices){
   return false;
 }
 
-float[] sphereSampling(float u, float theta){//https://mathworld.wolfram.com/SpherePointPicking.html
-  float x = sqrt(1-u*u)*cos(theta);
-  float y = sqrt(1-u*u)*sin(theta);
-  float[] result = {x, y, u};
-  return result;
-}
-
-ArrayList<Polygon> simplex2Poly(ArrayList<Simplex> simplexes){
-  ArrayList<Polygon> result = new ArrayList<Polygon>();
-  for(Simplex simplex : simplexes){
-    result.add(new Polygon(simplex));
+Simplex[] remove(Simplex[] simplexes, Simplex simplex){
+  Simplex[] result = new Simplex[simplexes.length-1];
+  for(int j = 0, c = 0; j < simplexes.length; j++){
+    if(simplexes[j] == simplex){continue;}
+    c++;
+    if(c < simplexes.length - 1){
+      result[c]=simplexes[j];
+    }
   }
   return result;
 }
 
-boolean contains(ArrayList<Integer> ids, int id){
-  for(int i : ids){
-    if(id == i)return true;
+boolean contains(Vertex[] vertices, Vertex vertex){
+  for(int i = 0; i < vertices.length; i++){
+    if(vertices[i] == vertex)return true;
+  }
+  return false;
+}
+
+boolean containsDst(Vertex[] vertices, Vertex vertex){
+  for(int i = 0; i < vertices.length; i++){
+    if(PVector.dist(toPVec(vertices[i].pos), toPVec(vertex.pos)) < EPSILON)return true;
   }
   return false;
 }

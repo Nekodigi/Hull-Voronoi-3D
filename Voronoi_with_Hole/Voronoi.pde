@@ -16,7 +16,7 @@ class Voronoi{
     }
     vertices = delaunay.vertices;//we use this when 2d
     for(Vertex v : vertices){//calculate all polygon
-      Polygon polygon = new Polygon();
+      Polygon polygon = new Polygon(v.col);
       Simplex current = null; 
       for(Simplex simplex : delaunay.simplexes){//pick up one of simplex which contain v
         if(hasItem(v, simplex.vertices)){
@@ -33,7 +33,7 @@ class Voronoi{
       boolean breakTag = false;
       while(current != end){//add vertex while going around v
       if(current == null)break;
-        adjHasV = getAdjHasVertex(current, v);
+        adjHasV = getAdjHasVertex(current, v);if(prev.disable){breakTag = true; break;}
         if(adjHasV[0] != prev){//to avoid backing
           prev = current;if(prev.circumC == null){breakTag = true; break;};
           polygon.vertices.add(prev.circumC);

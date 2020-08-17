@@ -45,6 +45,7 @@ class Voronoi{
         }
       }
       if(breakTag == true) continue;
+      polygon.calcCentroid();
       polygons.add(polygon);
     }
   }

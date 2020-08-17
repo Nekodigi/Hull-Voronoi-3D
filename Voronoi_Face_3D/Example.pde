@@ -1,34 +1,5 @@
-class ExampleSphericalVoronoi{
-  int numVertices = 100;
-  float size = 200;
-  SphericalVoronoi sVoronoi = new SphericalVoronoi();
-  ArrayList<Vertex> vertices = new ArrayList<Vertex>();
-  int seed = 0;
-  
-  ExampleSphericalVoronoi(){
-    //randomSeed(seed);
-    for(int i = 0; i < numVertices; i++){
-      vertices.add(new Vertex(0, mult(sphereSampling(random(-1, 1), random(TWO_PI)), size)));
-    }
-    
-    sVoronoi.Generate(vertices);
-  }
-  
-  void show(){
-    stroke(360);
-    for(Vertex vertex : vertices){
-      //point(vertex.pos);
-    }
-    stroke(0);
-    strokeWeight(5);
-    //noStroke();
-    for(Polygon polygon : sVoronoi.polygons){
-      polygon.show();
-    }
-  }
-}
-
 class ExampleVoronoi{
+  int dim;
   int numVertices = 100;
   float size = 200;
   Voronoi voronoi;
@@ -36,6 +7,7 @@ class ExampleVoronoi{
   int seed = 0;
   
   ExampleVoronoi(int dim){
+    this.dim = dim;
     //randomSeed(seed);
     for(int i = 0; i < numVertices; i++){
       switch(dim){
@@ -55,22 +27,29 @@ class ExampleVoronoi{
   void show(){
     stroke(255);
     for(Vertex vertex : vertices){
-      //point(vertex.pos);
+      point(vertex.pos);
     }
     stroke(0);
-    noFill();
-    for(Polygon polygon : voronoi.polygons){
-      polygon.show();
+    //noFill();
+    if(dim == 2){
+      for(Polygon poly : voronoi.polygons){
+        poly.show();
+      }
+    }else if(dim == 3){
+      noStroke();
+      for(Region region : voronoi.regions){
+        region.show();
+      }
+      //voronoi.regions.get(int(float(frameCount)/10%voronoi.regions.size())).show();//for easy to understand
     }
   }
 }
 
 class ExampleDelaunay{
   int numVertices = 100;
-  float size = 200;
+  float size = 800;
   Delaunay delaunay;
   ArrayList<Vertex> vertices = new ArrayList<Vertex>();
-  ArrayList<Polygon> polygons = new ArrayList<Polygon>();
   int seed = 0;
   
   ExampleDelaunay(int dim){
@@ -88,26 +67,26 @@ class ExampleDelaunay{
     
     delaunay = new Delaunay(dim);
     delaunay.Generate(vertices);
-    polygons = simplex2Poly(delaunay.simplexes);
   }
   
   void show(){
     stroke(255);
     for(Vertex vertex : vertices){
-      //point(vertex.pos);
+      point(vertex.pos);
     }
-    //stroke(255, 0, 0);
-    //point(delaunay.centroid);
+    stroke(255, 0, 0);
+    point(delaunay.centroid);
     stroke(0);
-    for(Polygon polygon : polygons){
-      polygon.show();
+    noFill();
+    for(Simplex simplex : delaunay.simplexes){
+      simplex.show();
     }
   }
 }
 
 class ExampleHull{
   int numVertices = 100;
-  float size = 200;
+  float size = 800;
   ConvexHull hull;
   ArrayList<Vertex> vertices = new ArrayList<Vertex>();
   int seed = 0;
@@ -133,14 +112,14 @@ class ExampleHull{
   }
   
   void show(){
-    stroke(360);
+    stroke(255);
     for(Vertex vertex : vertices){
       point(vertex.pos);
     }
-    stroke(0, 100, 100);
+    stroke(255, 0, 0);
     point(hull.centroid);
     stroke(0);
-    fill(360);
+    fill(255);
     for(Simplex simplex : hull.simplexes){
       simplex.show();
     }

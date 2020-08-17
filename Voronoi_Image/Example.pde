@@ -1,7 +1,7 @@
 class ExampleSphericalVoronoi{
   int numVertices = 100;
   float size = 200;
-  SphericalVoronoi sVoronoi = new SphericalVoronoi();
+  SphericalVoronoi sVoronoi = new SphericalVoronoi();;
   ArrayList<Vertex> vertices = new ArrayList<Vertex>();
   int seed = 0;
   
@@ -29,7 +29,7 @@ class ExampleSphericalVoronoi{
 }
 
 class ExampleVoronoi{
-  int numVertices = 100;
+  int numVertices = 1000;
   float size = 200;
   Voronoi voronoi;
   ArrayList<Vertex> vertices = new ArrayList<Vertex>();
@@ -57,8 +57,8 @@ class ExampleVoronoi{
     for(Vertex vertex : vertices){
       //point(vertex.pos);
     }
-    stroke(0);
-    noFill();
+    noStroke();
+    //noFill();
     for(Polygon polygon : voronoi.polygons){
       polygon.show();
     }
@@ -66,7 +66,7 @@ class ExampleVoronoi{
 }
 
 class ExampleDelaunay{
-  int numVertices = 100;
+  int numVertices = 1000;
   float size = 200;
   Delaunay delaunay;
   ArrayList<Vertex> vertices = new ArrayList<Vertex>();
@@ -98,7 +98,8 @@ class ExampleDelaunay{
     }
     //stroke(255, 0, 0);
     //point(delaunay.centroid);
-    stroke(0);
+    //stroke(0);
+    noStroke();
     for(Polygon polygon : polygons){
       polygon.show();
     }

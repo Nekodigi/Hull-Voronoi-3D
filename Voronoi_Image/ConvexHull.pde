@@ -8,7 +8,6 @@ class ConvexHull{
   ArrayList<Simplex> simplexes = new ArrayList<Simplex>();
   float[] centroid;
   ObjectBuffer buffer;
-  boolean useExtreme = false;//if use extreme, I can calculate speedy but, some time cause error(espacially few points)
   
   ConvexHull(int dim){
     this.dim = dim;
@@ -65,13 +64,8 @@ class ConvexHull{
   //region INITIALIZATION-------------------------------------
   //find the (dimension+1) initial points and create the simplexes
   void initConvexHull(){
-    ArrayList<Vertex> initialPoints;
-    if(useExtreme){
-      ArrayList<Vertex> extremes = findExtremes();//Bipolar vertex on each axis
-      initialPoints = findInitialPoints((extremes));//Returns furthest extreme pair ...(Returns dimension+1 extremes)
-    }else{
-      initialPoints = findInitialPoints((ArrayList)buffer.inputVertices);//Returns furthest extreme pair ...(Returns dimension+1 extremes)
-    }
+    ArrayList<Vertex> extremes = findExtremes();//Bipolar vertex on each axis
+    ArrayList<Vertex> initialPoints = findInitialPoints(extremes);//Returns furthest extreme pair ...(Returns dimension+1 extremes)
 
     for(int i = 0; i < initialPoints.size(); i++){
       buffer.currentVertex = initialPoints.get(i);
@@ -93,8 +87,7 @@ class ConvexHull{
   
   // Finds the extremes in all axis.
   ArrayList<Vertex> findExtremes(){
-    ArrayList<Vertex> extremes = new ArrayList<Vertex>();
-    ArrayList<Integer> ids = new ArrayList<Integer>();//for checking duplicate id
+    ArrayList<Vertex> extremes = new ArrayList<Vertex>(2 * dim);
     
     for(int i = 0; i < dim; i++){
       float min = Float.POSITIVE_INFINITY, max = Float.NEGATIVE_INFINITY;
@@ -113,10 +106,12 @@ class ConvexHull{
         }
       }
       
-      if(!contains(ids, minInd)){extremes.add(buffer.inputVertices.get(minInd)); ids.add(minInd);}
-      if(!contains(ids, maxInd)){extremes.add(buffer.inputVertices.get(maxInd)); ids.add(maxInd);}
+      if(minInd != maxInd){
+        extremes.add(buffer.inputVertices.get(minInd));
+        extremes.add(buffer.inputVertices.get(maxInd));
+      }else
+        throw new IllegalArgumentException();
     }
-    if(extremes.size()<dim+1)throw new IllegalArgumentException("couldn't find enough extremes");
     return extremes;
   }
   
@@ -168,8 +163,8 @@ class ConvexHull{
       
       if(maxPoint != null)
         initialPoints.add(maxPoint);
-      else{
-        throw new IllegalArgumentException("Singular input data error");}
+      else
+        throw new IllegalArgumentException("Singular input data error");
     }
     return initialPoints;
   }
