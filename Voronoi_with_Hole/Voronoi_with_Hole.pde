@@ -1,12 +1,13 @@
 //based on this code https://github.com/Scrawk/Hull-Delaunay-Voronoi
 float basehue = 0;
 boolean modeDelaunay = true;
-int n = 200;//number of vertices;
-float vr = 20;//vertex radius
-float mouseR = 120;//mouse separate radius, when delaunay it means radius, when voronoi it mean diameter
+int n = 300;//300 number of vertices;
+float vr = 20;//60 vertex radius
+float mouseR = 120;//300 mouse separate radius
 float relaxP = 0.4;//relax power
-float centerAttrP = 0.01;//center attract power
-float maxLength = 80;//max edge length
+float centerAttrP = 0.005;//0.005 center attract power
+float maxLength = 50;//300 simplex max edge length
+float polyMaxLength = 60;//150 polygon max edge length
 
 Delaunay delaunay;
 Voronoi voronoi;
@@ -15,6 +16,7 @@ Vertex mouse;
 
 void setup(){
   size(500, 500, P3D);
+  //fullScreen(P3D);
   colorMode(HSB, 360, 100, 100, 100);
   for(int i=0; i<n; i++){
     vertices.add(new Vertex(0, random(width), random(height)));
@@ -25,7 +27,7 @@ void setup(){
   //fullScreen(P3D);
   //size(500, 500, P3D);
   ortho();
-  strokeWeight(1);
+  strokeWeight(5);//5
 }
 
 void keyPressed(){

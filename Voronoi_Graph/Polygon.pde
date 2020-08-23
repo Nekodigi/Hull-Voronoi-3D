@@ -2,26 +2,24 @@ import java.util.Arrays;
 
 class Polygon{
   ArrayList<Vertex> vertices = new ArrayList<Vertex>();
-  color col;
+  color col = color(basehue, random(100), 100, 100);
   
-  Polygon(color col){this.col = col;}
+  Polygon(){}
   
   Polygon(Simplex simplex){
     this.vertices = new ArrayList(Arrays.asList(simplex.vertices));
   }
   
-  boolean checkDisable(){
-    for(int i=0; i<vertices.size()-1; i++){
-      float[] a = vertices.get(i).pos;
-      float[] b = vertices.get(i+1).pos;
-      float l = dist(a, b);
-      if(l > polyMaxLength)return true;
+  void toGraph(){
+    for(int i=0; i<vertices.size(); i++){
+      Vertex a = vertices.get(i);
+      Vertex b = vertices.get((i+1)%vertices.size());
+      a.addAdj(b);
+      b.addAdj(a);
     }
-    return false;
   }
   
   void show(){
-    if(checkDisable())return;
     fill(col);
     beginShape();
     for(Vertex v : vertices){

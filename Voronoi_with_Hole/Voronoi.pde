@@ -32,8 +32,8 @@ class Voronoi{
       polygon.vertices.add(prev.circumC);
       boolean breakTag = false;
       while(current != end){//add vertex while going around v
-      if(current == null)break;
-        adjHasV = getAdjHasVertex(current, v);if(prev.disable){breakTag = true; break;}
+        if(current == null)break;
+        adjHasV = getAdjHasVertex(current, v);if(prev.checkDisable()){breakTag = true; break;}
         if(adjHasV[0] != prev){//to avoid backing
           prev = current;if(prev.circumC == null){breakTag = true; break;};
           polygon.vertices.add(prev.circumC);

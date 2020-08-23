@@ -31,6 +31,15 @@ class Simplex{
     vertices = new Vertex[dim];
   }
   
+  void toGraph(){
+    for(int i=0; i<vertices.length; i++){
+      Vertex a = vertices[i];
+      Vertex b = vertices[(i+1)%vertices.length];
+      a.addAdj(b);
+      b.addAdj(a);
+    }
+  }
+  
   void calcCentroid(){
     centroid = avg(extractPos(vertices));
   }
@@ -41,16 +50,6 @@ class Simplex{
     }
   }
   
-  boolean checkDisable(){
-    for(int i=0; i<vertices.length-1; i++){
-      float[] a = vertices[i].pos;
-      float[] b = vertices[i+1].pos;
-      float l = dist(a, b);
-      if(l > maxLength)return true;
-    }
-    return false;
-  }
-  
   void clearBeyond(){
     beyondVertices = new ArrayList<Vertex>();
     maxDist = Float.NEGATIVE_INFINITY;
@@ -58,17 +57,13 @@ class Simplex{
   }
   
   void show(){
-    if(!checkDisable()){
-      switch(vertices.length){
-        case 2:
-          line(vertices[0].pos, vertices[1].pos);
-        case 3:
-          beginShape();
-          for(Vertex vertex : vertices){
-            vertex(vertex.pos);
-          }
-          endShape(CLOSE);
-      }
+    switch(vertices.length){
+      case 2:
+        beginShape();
+        for(Vertex vertex : vertices){
+          vertex(vertex.pos);
+        }
+        endShape(CLOSE);
     }
   }
   
