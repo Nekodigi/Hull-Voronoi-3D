@@ -2,6 +2,7 @@ class Voronoi{
   int dim;
   ArrayList<Region> regions = new ArrayList<Region>();//used for 3d
   ArrayList<Polygon> polygons = new ArrayList<Polygon>();//used for 2d
+  ArrayList<Vertex> vertices = new ArrayList<Vertex>();//all circumcenter of delaunay
   Delaunay delaunay;
   
   Voronoi(int dim){
@@ -13,6 +14,7 @@ class Voronoi{
     delaunay.Generate(input);
     for(Simplex simplex : delaunay.simplexes){//calculation all circumCenter
       simplex.calcCircumCenter();
+      vertices.add(simplex.circumC);
     }
     if(dim == 2)Generate2D();
     else if(dim == 3)Generate3D();

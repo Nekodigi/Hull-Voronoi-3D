@@ -4,11 +4,18 @@ class Vertex{
   int tag;
   float[] pos;
   ArrayList<Vertex> adj = new ArrayList<Vertex>();
+  Vertex previous;
+  float h;
+  float g;
   
   Vertex(int id, float ... pos){
     dim = pos.length;
     this.pos = pos;
     this.id = id;
+  }
+  
+  float getF(){
+    return h + g;
   }
   
   void addAdj(Vertex v){

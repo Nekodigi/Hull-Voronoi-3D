@@ -1,7 +1,7 @@
 class ExampleVoronoi{
   int dim;
-  int numVertices = 100;
-  float size = 200;
+  int numVertices = vnum;
+  float size = vsize;
   Voronoi voronoi;
   ArrayList<Vertex> vertices = new ArrayList<Vertex>();
   int seed = 0;
@@ -54,8 +54,8 @@ class ExampleVoronoi{
 }
 
 class ExampleDelaunay{
-  int numVertices = 20;
-  float size = 200;
+  int numVertices = vnum;
+  float size = vsize;
   Delaunay delaunay;
   ArrayList<Vertex> vertices = new ArrayList<Vertex>();
   int seed = 0;
