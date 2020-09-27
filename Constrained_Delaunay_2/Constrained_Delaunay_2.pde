@@ -3,7 +3,7 @@ float basehue = 0;
 boolean modeDelaunay = true;
 ArrayList<float[]> constraints = new ArrayList<float[]>();
 
-int numVertices = 100;
+int numVertices = 200;
 float size = 200;
 
 ExampleVoronoi ev2;
@@ -17,6 +17,8 @@ void setup(){
   constraints.add(set(0, 100));
   constraints.add(set(100, 0));
   constraints.add(set(0, 20));
+  //constraints = changePolygonOrient(constraints);
+  println(isPolygonOrientedClokwise(constraints));
   
   //ev2 = new ExampleVoronoi(2);
   ed2 = new ExampleConstrainedDelaunay(2, constraints, true);

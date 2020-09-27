@@ -175,24 +175,24 @@ boolean IsQuadrilateralConvex(float[] a, float[] b, float[] c, float[] d)
   return isConvex;
 }
 
-//based on this site https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order
-boolean isPolygonOrientedClokwise(ArrayList<float[]> ps){//assume 2d case
-  float sum = 0;
-  for(int i=0; i<ps.size(); i++){
-    float[] A = ps.get(i);
-    float[] B = ps.get((i+1)%ps.size());
-    sum += (B[0] - A[0])*(B[1] + A[1]);
-  }
-  return sum >= 0;
-}
+////based on this site https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order
+//boolean isPolygonOrientedClokwise(ArrayList<float[]> ps){//assume 2d case
+//  float sum = 0;
+//  for(int i=0; i<ps.size(); i++){
+//    float[] A = ps.get(i);
+//    float[] B = ps.get((i+1)%ps.size());
+//    sum += (B[0] - A[0])*(B[1] + A[1]);
+//  }
+//  return sum >= 0;
+//}
 
-ArrayList<float[]> changePolygonOrient(ArrayList<float[]> ps){
-  ArrayList<float[]> result = new ArrayList<float[]>();
-  for(int i=ps.size()-1; i>=0; i--){
-    result.add(ps.get(i));
-  }
-  return result;
-}
+//ArrayList<float[]> changePolygonOrient(ArrayList<float[]> ps){
+//  ArrayList<float[]> result = new ArrayList<float[]>();
+//  for(int i=ps.size()-1; i>=0; i--){
+//    result.add(ps.get(i));
+//  }
+//  return result;
+//}
 
 boolean IsTriangleOrientedClockwise(float[] p1, float[] p2, float[] p3){
   boolean isClockWise = true;
