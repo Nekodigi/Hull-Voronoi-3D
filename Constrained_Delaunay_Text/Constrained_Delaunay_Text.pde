@@ -2,24 +2,24 @@
 
 //based on this code https://github.com/Scrawk/Hull-Delaunay-Voronoi
 float basehue = 250;
-float spacing = 50;//sampling interval
+float spacing = 20;//sampling interval
 boolean modeDelaunay = true;
 ArrayList<ArrayList<float[]>> constraintss = new ArrayList<ArrayList<float[]>>();
 ArrayList<ArrayList<BPath>> charactors;
 ArrayList<Barrier> barriers = new ArrayList<Barrier>();
 
-int numVertices = 800;
-float size = 2000;
+int numVertices = 100;
+float size = 400;
 
 ExampleVoronoi ev2;
 ExampleConstrainedDelaunay ed2;
 
 void setup(){
-  //size(500, 500, P3D);
-  fullScreen(P3D);
+  size(800, 500, P3D);
+  //fullScreen(P3D);
   colorMode(HSB, 360, 100, 100, 100);
   //calculate font outline
-  charactors = genPath("Arial", height/3, "Nekodigi", 0, -200);//delaunay vertex sampling range is(-width/2, width/2)... so offset text 
+  charactors = genPath("Arial", height/3, "Nekodigi", 0, -20);//-200 delaunay vertex sampling range is(-width/2, width/2)... so offset text 
   for(ArrayList<BPath> charactor : charactors){
     for(BPath BPath : charactor){
       BPath.sample(spacing ,true);

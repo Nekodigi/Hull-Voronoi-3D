@@ -211,6 +211,12 @@ class ExampleConstrainedDelaunay {
     constrained = he.toSimplexes();
     polygons = simplex2Poly(constrained.simplexes);
   }
+  
+  void toGraph(){
+    for(Simplex s : constrained.simplexes){
+      s.toGraph();
+    }
+  }
 
   void show() {
     stroke(255);
